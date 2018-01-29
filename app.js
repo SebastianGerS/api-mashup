@@ -16,17 +16,45 @@ const appendListItem = (wordList) => {
 
   for (let j = 0; j < wordList.length; j++) {
     let listItem = document.createElement('li');
-    listItem.innerHTML = wordList[j];
+    let link = document.createElement('a');
+
+    listItem.innerHTML = `<a href="#">${wordList[j]}</a>`;
+    listItem.firstChild.addEventListener('click', search);
     list.appendChild(listItem);
   }
 };
-const search = (e) => {
+
+const checkForWordType = (wordType) => {
+  
+  if(wordType.syn) {
+    appendListItem(wordType.syn);
+  } else if(wordType.ant) {
+    appendListItem(wordType.ant);
+  } else if(wordType.usr) {
+    appendListItem(wordType.usr);
+  }
+
+};
+
+const search = function(e) {
   e.preventDefault();
-  let searchValue = searchField.value;
+  let searchValue;
+
+  if(searchField.value) {
+    searchValue = searchField.value;
+  } else {
+    searchValue = this.innerHTML;
+  }
+
+  while(content.hasChildNodes()) {
+    content.removeChild(content.firstChild);
+  }
+
   fetch(`${flickerUrl}&api_key=${flickerApiKey}&text=${searchValue}&safe_search=1&format=json&nojsoncallback=1"`)
     .then(res => res.json()).then(res => {
     
       results = res.photos.photo;
+
       for (let i = 0; i < results.length; i ++) {
         let figure = document.createElement('figure');
         let img = document.createElement('img');
@@ -34,31 +62,27 @@ const search = (e) => {
         figure.appendChild(img)
         content.appendChild(figure);
       }
+
+      searchField.value = "";
+     
    
     }).catch(e => {
       console.log(e);
     });
 
-    fetch(`${bigHugeUrl}${bigHugeApiKey}/${searchValue}/json`)
+  fetch(`${bigHugeUrl}${bigHugeApiKey}/${searchValue}/json`)
     .then(res => res.json())
     .then(res => {
+
+      while(list.hasChildNodes()) {
+        list.removeChild(list.firstChild);
+      }
+
       if (res.noun) {
-        if(res.noun.syn) {
-          appendListItem(res.noun.syn);
-        } else if(res.noun.ant) {
-          appendListItem(res.noun.ant);
-        } else if(res.noun.usr) {
-          appendListItem(res.noun.usr);
-        }
+        checkForWordType(res.noun);
         
       } else if (res.verb) {
-        if(res.noun.syn) {
-          appendListItem(res.noun.syn);
-        } else if(res.noun.ant) {
-          appendListItem(res.noun.ant);
-        } else if(res.noun.usr) {
-          appendListItem(res.noun.usr);
-        }
+        checkForWordType(res.verb);
       }
      
     });
