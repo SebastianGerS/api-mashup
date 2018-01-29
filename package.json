@@ -1,0 +1,19 @@
+{
+  "name": "08-api-mashup-sebastiangers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chas-academy/08-api-mashup-SebastianGerS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chas-academy/08-api-mashup-SebastianGerS/issues"
+  },
+  "homepage": "https://github.com/chas-academy/08-api-mashup-SebastianGerS#readme"
+}

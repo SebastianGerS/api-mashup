@@ -36,3 +36,9 @@ aside {
 .col-sm-10 {
   margin-top: 0;
 }
+
+.content {
+
+  min-width: 300px;
+
+}
