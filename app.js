@@ -57,9 +57,14 @@ const search = function(e) {
 
       for (let i = 0; i < results.length; i ++) {
         let figure = document.createElement('figure');
+        let link = document.createElement('a');
         let img = document.createElement('img');
+        link.target = "_blank"
+        link.href = `https://www.flickr.com/photos/${results[i].owner}/${results[i].id}`;
         img.src = `https://farm${results[i].farm}.staticflickr.com/${results[i].server}/${results[i].id}_${results[i].secret}.jpg`;
-        figure.appendChild(img)
+        link.appendChild(img);
+        figure.appendChild(link);
+
         content.appendChild(figure);
       }
 
