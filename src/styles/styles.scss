@@ -1,0 +1,44 @@
+
+body {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightskyblue;
+}
+
+main {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin:5em 0;
+
+}
+
+div {
+
+  display: flex;
+  flex-direction: row;
+  margin-top:2em;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+aside {
+  margin-left:1em;
+}
+
+.col-sm-10 {
+  margin-top: 0;
+}
+
+.content {
+
+  min-width: 300px;
+
+}
