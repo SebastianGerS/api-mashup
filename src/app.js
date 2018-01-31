@@ -70,6 +70,26 @@ const displayResults = (res) => {
   }
 }; // creates new elements with the data from the search ressult and apends to the container
 
+const displayError = (url) => {
+
+  let paragraph = document.createElement('p');
+
+  if (url.includes("api.flickr.com")) {
+    
+    removeContent(content);
+
+    paragraph.innerHTML = "No Images could be found";
+    content.appendChild(paragraph);
+
+  } else {
+
+    removeContent(list);
+
+    paragraph.innerHTML = "No related words found";
+    list.appendChild(paragraph);
+  }
+}; // displays errors if no images or related words are found
+
 const fetchAndDisplayData = (completeUrl) => {
 
   fetch(completeUrl)
@@ -80,8 +100,16 @@ const fetchAndDisplayData = (completeUrl) => {
 
         res = res.photos.photo;
 
-        removeContent(content);
-        displayResults(res);  
+        if (res.length) {
+          
+          removeContent(content);
+          displayResults(res);  
+
+        } else  {
+
+          displayError(completeUrl);
+        }
+        
 
       } else {
 
@@ -90,9 +118,9 @@ const fetchAndDisplayData = (completeUrl) => {
       } /*this works becous there are only cales made to two diffrent api's if more where called 
       adisional else if would be nacesary to preform the corect actions if they are not the same as for the big huges api*/
      
-    }).catch(e => {
+    }).catch( () => {
 
-      console.log(e);
+      displayError(completeUrl);
     });
 }; // makes an async api call to fetch data from given api
 
