@@ -119,10 +119,10 @@ const search = function(e) {
   e.preventDefault();
 
   const flickerUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search";
-  const flickerApiKey = "2e0240e78ddd71b7a1fb75ec2a28b41c";
+  const flickerApiKey = process.env.FLICKR_API_KEY;
   const flickerApendage = "safe_search=1&format=json&nojsoncallback=1";
   const bigHugeUrl = "http://words.bighugelabs.com/api/2/";
-  const bigHugeApiKey = "9b7c8ee5f8778f4292b2aebad9fed742";
+  const bigHugeApiKey = process.env.BIG_HUGH_API_KEY;
 
   let searchTerm = determineSearchValue(this);
 
