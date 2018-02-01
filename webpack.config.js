@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -26,14 +27,11 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
-        use: [{
-            loader: "style-loader"
-        }, {
-            loader: "css-loader"
-        }, {
-            loader: "sass-loader"
-        }]
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }
     ],
   },
@@ -43,6 +41,7 @@ module.exports = {
       names: ['manifest']
     }),
     new HtmlWebpackPlugin({template: './src/index.html'}),
+    new ExtractTextPlugin("styles.css"),
     new Dotenv({
       path: '.env', // Path to .env file
       safe: true // load .env.example (defaults to "false" which does not use dotenv-safe) 

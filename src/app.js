@@ -1,4 +1,4 @@
-import './styles/styles.scss';
+import './styles/styles.css';
 
 const searchButton = document.querySelector('button'); //button to trigger search
 const searchField = document.querySelector('input'); // input field where user types in searchwords
